@@ -678,16 +678,19 @@ def generate_frames():
 
         if frame is None:
 
-            time.sleep(0.05)
+            time.sleep(0.03)
 
             continue
 
         success, buffer = cv2.imencode(
             ".jpg",
-            frame
+            frame,
+            [int(cv2.IMWRITE_JPEG_QUALITY), 85]
         )
 
         if not success:
+
+            time.sleep(0.01)
 
             continue
 
@@ -700,17 +703,25 @@ def generate_frames():
             + b"\r\n"
         )
 
+        # Cap stream to ~30 FPS to prevent buffer bloat and browser stalling
+        time.sleep(0.033)
+
 
 @app.route("/video_feed")
 def video_feed():
 
-    return Response(
+    response = Response(
         generate_frames(),
         mimetype=(
             "multipart/x-mixed-replace; "
             "boundary=frame"
         )
     )
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
 
 
 # ==========================================

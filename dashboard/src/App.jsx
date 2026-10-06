@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
-const API = "http://127.0.0.1:5000";
+const API = "http://127.0.0.1:5001";
 
 function App() {
   const [serverOnline, setServerOnline] = useState(false);
@@ -16,6 +16,12 @@ function App() {
 
   const [browserCamera, setBrowserCamera] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  const [videoFeedSrc, setVideoFeedSrc] = useState(
+    typeof window !== "undefined" &&
+      (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+      ? "http://127.0.0.1:5001/video_feed"
+      : "/video_feed"
+  );
 
   // --------------------------------
   // ALARM STATE
@@ -635,11 +641,22 @@ function App() {
             }`}
           >
 
-            <img
-              src="/video_feed"
-              className="python-video"
-              alt="Python Drowsiness Detection"
-            />
+            {serverOnline && status.camera ? (
+              <img
+                src={videoFeedSrc}
+                className="python-video"
+                alt="Python Drowsiness Detection"
+                onError={() => {
+                  setVideoFeedSrc((prev) =>
+                    prev.includes("127.0.0.1:5001")
+                      ? "/video_feed"
+                      : prev === "/video_feed"
+                      ? "http://localhost:5001/video_feed"
+                      : "/video_feed"
+                  );
+                }}
+              />
+            ) : null}
 
             {!serverOnline && (
               <div className="camera-message">
