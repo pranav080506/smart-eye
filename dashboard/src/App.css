@@ -1038,3 +1038,79 @@ kbd {
     transform: translateY(0);
   }
 }
+
+/* =========================
+   BROWSER AI ENGINE STYLES
+   ========================= */
+
+.browser-ai-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  background: #000;
+}
+
+.browser-ai-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(-1);
+  pointer-events: none;
+}
+
+.engine-mode-selector {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #0d1718;
+  border: 1px solid #1c2b2c;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.engine-mode-btn {
+  background: transparent;
+  border: none;
+  color: #7e9192;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+.engine-mode-btn:hover {
+  color: #ffffff;
+}
+
+.engine-mode-btn.active {
+  background: #153435;
+  color: #6ee7b7;
+  border: 1px solid #235e5b;
+}
+
+.inline-switch-btn {
+  margin-top: 14px;
+  background: #17383a;
+  border: 1px solid #337a76;
+  color: #72eae3;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inline-switch-btn:hover {
+  background: #204e51;
+  color: #ffffff;
+  border-color: #55bdb7;
+  transform: translateY(-1px);
+}
