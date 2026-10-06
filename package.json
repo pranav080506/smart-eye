@@ -1,0 +1,10 @@
+{
+  "name": "smart-eye",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix dashboard run start",
+    "dev": "npm --prefix dashboard run dev",
+    "build": "npm --prefix dashboard run build"
+  }
+}
